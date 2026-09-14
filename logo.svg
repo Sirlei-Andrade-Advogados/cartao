@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="301" height="308" viewBox="167 71 301 308">
+  
+  <defs>
+    <linearGradient id="ouro" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6f5223"></stop><stop offset="38%" stop-color="#c8a86a"></stop>
+      <stop offset="62%" stop-color="#8a6d3b"></stop><stop offset="100%" stop-color="#5f4519"></stop>
+    </linearGradient>
+    <linearGradient id="prata" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6f767c"></stop><stop offset="40%" stop-color="#cfd4d8"></stop>
+      <stop offset="65%" stop-color="#8d949a"></stop><stop offset="100%" stop-color="#666d73"></stop>
+    </linearGradient>
+    <clipPath id="dir" clipPathUnits="userSpaceOnUse"><rect x="330" y="0" width="300" height="500"></rect></clipPath>
+    <clipPath id="esq" clipPathUnits="userSpaceOnUse"><rect x="0" y="0" width="330" height="500"></rect></clipPath>
+    <mask id="furoPrata" maskUnits="userSpaceOnUse" x="0" y="0" width="700" height="500"><rect width="700" height="500" fill="#fff"></rect><polygon points="317,86 453,244 317,308 182,244" fill="none" stroke="#000" stroke-width="27" clip-path="url(#esq)"></polygon></mask>
+    <mask id="furoOuro" maskUnits="userSpaceOnUse" x="0" y="0" width="700" height="500"><rect width="700" height="500" fill="#fff"></rect><polygon points="317,142 453,300 317,364 182,300" fill="none" stroke="#000" stroke-width="27" clip-path="url(#dir)"></polygon></mask>
+  </defs>
+  <g transform="translate(0,0)">
+    <polygon points="317,142 453,300 317,364 182,300" fill="none" stroke="url(#prata)" stroke-width="15" mask="url(#furoPrata)"></polygon>
+    <polygon points="317,86 453,244 317,308 182,244" fill="none" stroke="url(#ouro)" stroke-width="15" mask="url(#furoOuro)"></polygon>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+# foto sem recorte, não usada pelo site
+sirlei_original.jpg
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
