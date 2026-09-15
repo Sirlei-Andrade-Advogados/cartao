@@ -47,6 +47,9 @@ def main() -> None:
     # 1 módulo = N pixels, calculado para o PNG sair no tamanho físico certo
     px_total = round(LADO_CM / 2.54 * DPI)
 
+    lado_mm = LADO_CM * 10
+    lado_pt = lado_mm * 72 / 25.4          # PDF trabalha em pontos (1/72 pol.)
+
     for nome, url in DESTINOS.items():
         qr = segno.make(url, error="m")
         modulos = qr.symbol_size(border=4)[0]
@@ -55,8 +58,10 @@ def main() -> None:
         for cor_nome, cor in CORES.items():
             base = PASTA / f"{nome}-{cor_nome}"
             comum = {"dark": cor, "light": "#ffffff", "border": 4}
-            qr.save(base.with_suffix(".svg"), scale=10, **comum)
-            qr.save(base.with_suffix(".pdf"), scale=10, **comum)
+            # vetoriais já no tamanho físico final: a gráfica posiciona e imprime,
+            # sem precisar redimensionar nem adivinhar escala
+            qr.save(base.with_suffix(".svg"), scale=lado_mm / modulos, unit="mm", **comum)
+            qr.save(base.with_suffix(".pdf"), scale=lado_pt / modulos, **comum)
             qr.save(base.with_suffix(".png"), scale=escala, **comum)
 
         lado_px = modulos * escala
@@ -64,6 +69,7 @@ def main() -> None:
             f"{nome}\n"
             f"   {url}\n"
             f"   versão {qr.version}, {modulos}x{modulos} módulos com margem\n"
+            f"   SVG e PDF: {lado_mm:.0f}x{lado_mm:.0f} mm\n"
             f"   PNG {lado_px}x{lado_px}px = {lado_px / DPI * 2.54:.1f} cm a {DPI} dpi\n"
         )
 
