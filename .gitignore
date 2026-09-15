@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# arte de impressao: arquivos grandes e fontes, ficam so no PC
+impressao/
