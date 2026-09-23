@@ -66,8 +66,14 @@ def vcard(p: dict, idioma: str) -> str:
 
 
 def qr_svg(p: dict, idioma: str) -> tuple[str, int]:
-    """QR do contato como SVG inline, sem moldura própria."""
-    qr = qr_mais_legivel(vcard(p, idioma), error="m")
+    """QR do contato como SVG inline, sem moldura própria.
+
+    Correção de erro L (baixa): o QR é mostrado numa tela, não impresso, então
+    não precisa sobreviver a papel riscado. Com L o código fica menos denso
+    (69 em vez de 77 módulos para o vCard do Alessandro) e lê melhor.
+    A tela da Dra. Sirlei, congelada, continua com a versão já publicada.
+    """
+    qr = qr_mais_legivel(vcard(p, idioma), error="l")
     import io
     buf = io.BytesIO()          # o escritor de SVG do segno trabalha em bytes
     qr.save(buf, kind="svg", scale=1, border=2, dark="#000000", light=None,

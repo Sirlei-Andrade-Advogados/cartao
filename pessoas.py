@@ -52,23 +52,31 @@ PESSOAS = {
         "celular": "+5511982072944",
         "email": "alessandro@sirleiadv.com.br",
         "foto": "alessandro.jpg",
-        "cargo": {"pt": "Advogado", "en": "Attorney"},
+        "cargo": {"pt": "Coordenador do Contencioso", "en": "Litigation Coordinator"},
         "bio": {
-            "pt": ["Especializado em Direito Empresarial.",
-                   "Responsável pela gestão e coordenação da equipe do "
-                   "contencioso estratégico do escritório."],
-            "en": ["Specialized in Business Law.",
-                   "Responsible for managing and coordinating the firm's "
-                   "strategic litigation team."],
+            "pt": ["Sócio Sênior da Sirlei Andrade Advogados, com mais de 25 anos de "
+                   "atuação jurídica. Bacharel em Direito pela FIG, com formação "
+                   "complementar em Processo Civil (PUC-SP), Direito Empresarial, "
+                   "Constitucional e Imobiliário (ESA OAB/SP). Mestrando pela PUC-SP.",
+                   "Atua em contratos, contencioso estratégico, due diligence "
+                   "imobiliária e aquisição de ativos."],
+            "en": ["Senior Partner at Sirlei Andrade Advogados, with more than 25 years "
+                   "of legal practice. Bachelor of Laws from FIG, with complementary "
+                   "training in Civil Procedure (PUC-SP) and in Business, Constitutional "
+                   "and Real Estate Law (ESA OAB/SP). Master's candidate at PUC-SP.",
+                   "He practices in contracts, strategic litigation, real estate due "
+                   "diligence and asset acquisitions."],
         },
         # (chave, português, inglês)
         "areas": [
             ("area_empresarial", "Direito Empresarial", "Business Law"),
+            ("area_contratual", "Direito Contratual", "Contract Law"),
             ("area_contencioso", "Contencioso Estratégico", "Strategic Litigation"),
+            ("area_due_diligence", "Due Diligence Imobiliária", "Real Estate Due Diligence"),
+            ("area_aquisicao", "Aquisição de Ativos", "Asset Acquisitions"),
         ],
-        # A linha da OAB na seção Empresa é a da Dra. Sirlei. Preencha com o
-        # número dele para exibir a própria; vazio, a linha some.
-        "oab": "",
+        # Número da OAB exibido na seção Empresa (vazio = a linha some)
+        "oab": "198.911",
     },
 }
 

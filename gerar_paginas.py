@@ -82,7 +82,8 @@ def derivar(p: dict, slug: str) -> str:
               f'<title data-i18n="title">{titulo["pt"]}</title>', nome="title")
     s = troca_re(s, r'<meta name="description" content="[^"]*">',
                  f'<meta name="description" content="Cartão digital de {nome}, '
-                 f'{cargo["pt"].lower()} da Sirlei Andrade Advogados Associados.">',
+                 f'{cargo["pt"].lower()} da Sirlei Andrade Advogados Associados'
+                 + (f' (OAB/SP {p["oab"]})' if p.get("oab") else "") + '.">',
                  nome="meta description")
     s = troca(s, f'<meta property="og:title" content="{m["completo"]} — {m["cargo"]["pt"]}">',
               f'<meta property="og:title" content="{nome} — {cargo["pt"]}">', nome="og:title")
