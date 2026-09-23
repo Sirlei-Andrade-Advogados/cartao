@@ -21,6 +21,8 @@ from pathlib import Path
 
 import segno
 
+from qr_robusto import qr_mais_legivel
+
 PASTA = Path(__file__).resolve().parent / "qrcode"
 
 # --------------------------------------------------------------------------
@@ -30,7 +32,16 @@ PASTA = Path(__file__).resolve().parent / "qrcode"
 DESTINOS = {
     "cartao-sirlei-github": "https://sirlei-andrade-advogados.github.io/cartao/",
     "cartao-sirlei-dominio": "https://cartao.sirleiadv.com.br",
+    "cartao-alessandro-github": "https://sirlei-andrade-advogados.github.io/cartao/alessandro/",
 }
+
+#: QR já impresso não muda de desenho. O da Dra. Sirlei está na arte do
+#: cartão enviada à gráfica (impressao/gerar_cartao.py lê este arquivo).
+MASCARA_FIXA = {"cartao-sirlei-github": 6}
+
+#: QR já publicado ou impresso não é regerado. Os da Dra. Sirlei estão na
+#: arte do cartão enviada à gráfica.
+CONGELADOS = {"cartao-sirlei-github", "cartao-sirlei-dominio"}
 
 CORES = {
     "preto": "#000000",
@@ -51,7 +62,9 @@ def main() -> None:
     lado_pt = lado_mm * 72 / 25.4          # PDF trabalha em pontos (1/72 pol.)
 
     for nome, url in DESTINOS.items():
-        qr = segno.make(url, error="m")
+        if nome in CONGELADOS:
+            continue                              # já impresso: não mexer
+        qr = qr_mais_legivel(url, error="m")
         modulos = qr.symbol_size(border=4)[0]
         escala = max(1, round(px_total / modulos))
 

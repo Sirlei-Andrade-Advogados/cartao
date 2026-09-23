@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contato — Alessandro Louzado</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#030714">
+<!-- vira atalho de tela cheia quando adicionada à tela de início do iPhone -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Meu contato">
+<link rel="apple-touch-icon" href="icone.png">
+<link rel="icon" href="icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fundo:#030714;
+    --ouro:#c2ad83;
+    --marfim:#f4efe6;
+    --apagado:#8792a8;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--fundo);color:var(--marfim);
+    font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    /* não deixa a tela rolar nem dar zoom acidental enquanto ela mostra */
+    overscroll-behavior:none;-webkit-text-size-adjust:100%;
+  }
+  .tela{
+    min-height:100%;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:clamp(14px,3.2vh,26px);
+    padding:calc(env(safe-area-inset-top) + 20px) 20px
+            calc(env(safe-area-inset-bottom) + 20px);
+    text-align:center;
+  }
+  .chamada{
+    margin:0;font-size:clamp(10px,2.9vw,13px);font-weight:400;
+    letter-spacing:.22em;color:var(--ouro);text-transform:uppercase;
+  }
+  /* a placa branca é o que a câmera precisa enxergar: fica sempre clara,
+     independente do tema do telefone */
+  .placa{
+    background:#fff;border-radius:14px;padding:clamp(12px,3.2vw,20px);
+    width:min(78vw,52vh,420px);aspect-ratio:1;
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+    display:grid;place-items:center;
+  }
+  .placa svg{width:100%;height:100%;display:block}
+  .placa svg path{fill:#000}
+  [hidden]{display:none!important}
+  .nome{
+    margin:0;font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:clamp(28px,8vw,40px);font-weight:400;line-height:1.05;
+  }
+  .cargo{margin:4px 0 0;font-size:clamp(11px,3.2vw,14px);color:var(--ouro);letter-spacing:.06em}
+  .dica{margin:0;font-size:clamp(11px,3.1vw,13px);color:var(--apagado);font-weight:300}
+  .rodape{
+    display:flex;align-items:center;gap:14px;margin-top:2px;
+    font-size:12px;color:var(--apagado);
+  }
+  .rodape a,.rodape button{
+    font:inherit;color:var(--apagado);background:none;border:0;padding:6px 10px;
+    border-radius:999px;cursor:pointer;text-decoration:none;
+    border:1px solid rgba(135,146,168,.35);
+  }
+  .rodape button[aria-pressed="true"]{background:var(--ouro);color:#1a1408;border-color:var(--ouro)}
+  .marca{width:34px;height:34px;opacity:.9}
+  .marca svg{width:100%;height:100%;display:block}
+  :focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="tela">
+  <div class="marca"><svg viewBox="167 71 301 308" aria-hidden="true"><defs>
+<linearGradient id="lo" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6f5223"/><stop offset="38%" stop-color="#c8a86a"/><stop offset="62%" stop-color="#8a6d3b"/><stop offset="100%" stop-color="#5f4519"/></linearGradient>
+<linearGradient id="lp" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6f767c"/><stop offset="40%" stop-color="#cfd4d8"/><stop offset="65%" stop-color="#8d949a"/><stop offset="100%" stop-color="#666d73"/></linearGradient>
+<clipPath id="ld" clipPathUnits="userSpaceOnUse"><rect x="330" y="0" width="300" height="500"/></clipPath>
+<clipPath id="le" clipPathUnits="userSpaceOnUse"><rect x="0" y="0" width="330" height="500"/></clipPath>
+<mask id="lfp" maskUnits="userSpaceOnUse" x="0" y="0" width="700" height="500"><rect width="700" height="500" fill="#fff"/><polygon points="317,86 453,244 317,308 182,244" fill="none" stroke="#000" stroke-width="27" clip-path="url(#le)"/></mask>
+<mask id="lfo" maskUnits="userSpaceOnUse" x="0" y="0" width="700" height="500"><rect width="700" height="500" fill="#fff"/><polygon points="317,142 453,300 317,364 182,300" fill="none" stroke="#000" stroke-width="27" clip-path="url(#ld)"/></mask>
+</defs>
+<polygon points="317,142 453,300 317,364 182,300" fill="none" stroke="url(#lp)" stroke-width="15" mask="url(#lfp)"/>
+<polygon points="317,86 453,244 317,308 182,244" fill="none" stroke="url(#lo)" stroke-width="15" mask="url(#lfo)"/></svg></div>
+  <p class="chamada" id="chamada">ESCANEIE PARA SALVAR MEU CONTATO</p>
+
+  <div class="placa">
+    <div id="qr-pt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 73" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid meet"><path stroke="#000" d="M2 2.5h7m1 0h1m4 0h1m3 0h7m1 0h1m3 0h1m1 0h1m3 0h1m1 0h1m2 0h3m1 0h1m2 0h1m6 0h2m2 0h3m1 0h7m-69 1h1m5 0h1m1 0h2m1 0h3m3 0h3m3 0h1m1 0h1m5 0h2m8 0h1m2 0h1m2 0h2m1 0h3m1 0h3m5 0h1m5 0h1m-69 1h1m1 0h3m1 0h1m2 0h1m2 0h4m3 0h2m1 0h2m4 0h2m4 0h2m3 0h2m1 0h1m1 0h1m1 0h3m1 0h3m1 0h3m1 0h1m3 0h1m1 0h3m1 0h1m-69 1h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m1 0h2m1 0h1m2 0h2m2 0h4m3 0h5m7 0h3m1 0h1m2 0h3m4 0h1m1 0h1m1 0h3m1 0h1m-69 1h1m1 0h3m1 0h1m3 0h4m2 0h3m1 0h3m3 0h2m2 0h11m2 0h1m1 0h1m2 0h3m1 0h2m1 0h4m1 0h1m1 0h1m1 0h3m1 0h1m-69 1h1m5 0h1m6 0h8m2 0h4m1 0h1m2 0h2m3 0h1m1 0h1m3 0h2m2 0h2m1 0h2m2 0h2m2 0h2m3 0h1m5 0h1m-69 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-61 1h2m2 0h1m1 0h1m1 0h3m2 0h2m7 0h3m3 0h1m3 0h2m4 0h1m1 0h6m1 0h1m1 0h3m-60 1h1m1 0h2m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m4 0h2m3 0h1m2 0h5m1 0h5m6 0h2m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h1m1 0h2m-68 1h4m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1m1 0h3m5 0h1m3 0h2m2 0h1m2 0h4m3 0h3m4 0h3m2 0h3m2 0h3m1 0h1m-69 1h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h6m1 0h1m4 0h3m2 0h1m3 0h2m1 0h2m1 0h3m1 0h2m1 0h1m6 0h3m1 0h1m1 0h1m2 0h1m2 0h6m-67 1h1m6 0h9m3 0h2m1 0h2m2 0h2m3 0h3m6 0h1m2 0h6m7 0h3m-61 1h1m1 0h1m1 0h1m1 0h4m1 0h1m3 0h4m3 0h4m1 0h7m2 0h2m5 0h1m1 0h1m1 0h2m1 0h2m1 0h3m1 0h1m1 0h1m3 0h1m4 0h1m-67 1h2m3 0h2m3 0h1m1 0h1m2 0h4m2 0h2m2 0h1m1 0h1m6 0h3m1 0h2m3 0h1m1 0h1m1 0h3m3 0h2m2 0h1m1 0h2m1 0h1m2 0h1m-68 1h1m2 0h2m1 0h1m1 0h2m3 0h5m1 0h4m1 0h2m2 0h1m3 0h1m1 0h2m1 0h3m1 0h4m3 0h2m2 0h1m2 0h1m1 0h1m2 0h6m1 0h1m-67 1h3m4 0h4m1 0h1m2 0h1m2 0h2m2 0h1m4 0h2m1 0h1m6 0h2m2 0h1m1 0h1m3 0h1m6 0h4m1 0h3m1 0h1m1 0h2m-68 1h1m2 0h2m1 0h2m1 0h1m1 0h5m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m2 0h2m3 0h1m5 0h3m6 0h1m1 0h1m2 0h1m1 0h2m1 0h1m3 0h4m-64 1h1m2 0h2m2 0h1m2 0h2m3 0h1m5 0h1m1 0h1m1 0h2m2 0h3m3 0h2m3 0h3m3 0h1m3 0h1m1 0h3m1 0h1m1 0h2m2 0h2m-67 1h1m1 0h3m1 0h4m1 0h2m1 0h4m2 0h1m4 0h3m2 0h1m1 0h3m2 0h1m1 0h1m3 0h2m1 0h1m2 0h3m1 0h1m4 0h4m1 0h3m-68 1h3m2 0h1m1 0h4m3 0h1m1 0h2m1 0h4m5 0h2m1 0h2m2 0h1m1 0h1m5 0h1m2 0h6m3 0h1m1 0h2m2 0h2m4 0h2m-69 1h1m3 0h3m1 0h1m1 0h2m1 0h1m1 0h1m4 0h1m2 0h1m1 0h2m2 0h1m1 0h2m2 0h1m4 0h1m4 0h3m1 0h1m1 0h5m4 0h1m1 0h1m1 0h4m-68 1h1m2 0h3m1 0h2m4 0h2m4 0h2m1 0h2m12 0h1m4 0h3m3 0h3m4 0h1m4 0h3m2 0h1m-59 1h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h9m1 0h1m1 0h1m4 0h3m1 0h3m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m-67 1h3m2 0h4m5 0h1m3 0h3m2 0h2m1 0h1m1 0h1m3 0h1m4 0h1m1 0h1m2 0h3m1 0h2m2 0h1m2 0h1m5 0h1m2 0h2m-66 1h1m4 0h4m2 0h2m1 0h1m2 0h5m1 0h1m1 0h5m4 0h1m1 0h1m5 0h1m2 0h1m1 0h2m2 0h1m3 0h1m5 0h2m3 0h3m-68 1h3m3 0h2m2 0h3m3 0h4m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m3 0h3m1 0h1m4 0h1m4 0h2m5 0h1m3 0h2m1 0h2m2 0h1m-67 1h1m1 0h3m1 0h2m2 0h1m2 0h2m1 0h1m1 0h2m1 0h3m2 0h1m2 0h1m3 0h1m2 0h1m5 0h2m3 0h3m3 0h3m1 0h1m2 0h1m1 0h2m-64 1h2m1 0h1m1 0h1m1 0h1m6 0h1m1 0h1m1 0h4m2 0h1m2 0h1m1 0h1m3 0h1m4 0h2m1 0h2m1 0h2m4 0h1m2 0h4m1 0h2m2 0h5m-68 1h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h2m2 0h1m3 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h3m1 0h1m2 0h2m2 0h4m2 0h2m1 0h1m1 0h2m-67 1h2m1 0h1m3 0h1m1 0h1m2 0h1m2 0h2m1 0h1m1 0h2m4 0h3m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m3 0h2m1 0h2m2 0h1m2 0h4m2 0h1m1 0h2m1 0h2m-68 1h1m2 0h12m2 0h1m2 0h1m1 0h2m2 0h2m2 0h3m1 0h1m1 0h1m1 0h3m6 0h1m1 0h2m2 0h1m7 0h2m4 0h1m-63 1h1m1 0h1m2 0h2m2 0h1m4 0h1m2 0h1m1 0h2m1 0h1m3 0h3m2 0h7m6 0h2m1 0h4m4 0h2m5 0h2m-68 1h2m1 0h5m4 0h4m2 0h1m1 0h3m1 0h1m2 0h2m2 0h6m1 0h2m1 0h1m4 0h1m1 0h5m1 0h1m2 0h7m2 0h1m-68 1h3m1 0h1m3 0h3m1 0h1m1 0h3m1 0h3m4 0h1m1 0h1m1 0h2m1 0h1m3 0h2m2 0h1m1 0h1m1 0h1m4 0h1m4 0h1m1 0h2m2 0h1m3 0h3m1 0h1m-68 1h1m2 0h1m1 0h1m1 0h2m3 0h1m1 0h3m1 0h1m2 0h2m1 0h1m3 0h2m1 0h1m1 0h1m1 0h8m2 0h2m2 0h1m2 0h2m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m-68 1h4m3 0h1m2 0h1m4 0h1m1 0h3m1 0h2m1 0h1m1 0h2m1 0h3m3 0h2m1 0h1m2 0h1m3 0h5m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m1 0h1m-68 1h1m2 0h6m1 0h1m2 0h6m3 0h1m1 0h1m2 0h11m3 0h1m1 0h1m1 0h2m1 0h1m1 0h2m3 0h1m3 0h6m-64 1h5m3 0h1m2 0h1m2 0h1m3 0h1m4 0h3m2 0h3m2 0h1m1 0h6m1 0h1m1 0h1m1 0h1m1 0h4m3 0h1m4 0h3m-64 1h4m2 0h1m2 0h3m6 0h3m3 0h2m1 0h1m2 0h3m1 0h5m1 0h3m1 0h2m3 0h1m6 0h1m4 0h1m1 0h3m-66 1h1m4 0h1m1 0h2m3 0h7m4 0h1m4 0h1m2 0h3m2 0h2m2 0h1m1 0h5m1 0h2m1 0h1m1 0h2m1 0h2m1 0h1m6 0h1m-64 1h4m1 0h8m1 0h1m1 0h1m2 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h3m5 0h3m4 0h1m2 0h1m1 0h2m1 0h3m3 0h1m1 0h3m-68 1h1m2 0h2m2 0h1m1 0h3m1 0h4m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m3 0h1m2 0h1m1 0h2m4 0h2m2 0h1m2 0h1m4 0h2m3 0h1m-69 1h1m1 0h1m1 0h1m1 0h3m4 0h3m7 0h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h3m1 0h1m4 0h1m2 0h3m1 0h2m1 0h3m1 0h2m2 0h1m1 0h3m-68 1h1m1 0h3m2 0h1m1 0h2m2 0h1m2 0h1m1 0h1m5 0h1m1 0h3m1 0h2m6 0h1m1 0h3m4 0h1m1 0h1m2 0h1m1 0h1m2 0h2m1 0h2m1 0h2m3 0h1m-68 1h7m2 0h4m2 0h1m2 0h2m2 0h1m1 0h1m3 0h1m3 0h2m1 0h6m3 0h3m2 0h1m1 0h2m4 0h1m3 0h2m2 0h1m-67 1h2m1 0h2m2 0h1m3 0h3m2 0h1m3 0h2m1 0h1m1 0h1m6 0h4m1 0h1m2 0h3m1 0h1m3 0h2m1 0h1m2 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h1m-69 1h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h1m3 0h1m3 0h1m2 0h1m1 0h1m1 0h4m1 0h4m3 0h2m5 0h1m2 0h1m1 0h1m2 0h3m1 0h4m-69 1h1m2 0h2m3 0h3m1 0h3m2 0h2m3 0h2m8 0h1m2 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h2m1 0h1m3 0h4m2 0h1m-64 1h1m2 0h2m1 0h1m1 0h2m6 0h1m3 0h1m1 0h7m1 0h1m2 0h2m4 0h1m5 0h3m4 0h2m2 0h1m2 0h4m2 0h1m-67 1h1m1 0h2m5 0h1m1 0h1m2 0h1m2 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h5m1 0h1m1 0h2m2 0h5m3 0h1m5 0h3m1 0h1m1 0h1m-66 1h2m1 0h3m3 0h1m1 0h2m1 0h2m1 0h2m3 0h1m1 0h1m3 0h4m2 0h3m1 0h1m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m3 0h1m-68 1h3m4 0h2m2 0h3m3 0h7m1 0h3m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m3 0h1m1 0h3m1 0h1m1 0h3m2 0h2m1 0h2m1 0h4m-68 1h1m2 0h1m1 0h1m2 0h3m1 0h2m4 0h1m2 0h3m1 0h3m3 0h2m3 0h2m3 0h5m3 0h1m3 0h1m1 0h1m1 0h2m2 0h4m-61 1h1m1 0h3m1 0h1m3 0h3m2 0h6m2 0h3m1 0h1m2 0h1m5 0h1m1 0h1m2 0h2m1 0h1m5 0h1m1 0h2m4 0h3m1 0h2m-69 1h2m1 0h2m1 0h4m1 0h3m3 0h2m4 0h1m1 0h3m1 0h2m3 0h1m5 0h1m4 0h1m1 0h1m1 0h3m5 0h1m1 0h1m1 0h1m1 0h1m1 0h3m-66 1h2m6 0h1m3 0h3m4 0h2m2 0h4m2 0h2m2 0h1m9 0h4m2 0h1m1 0h1m3 0h1m1 0h2m2 0h1m3 0h2m-68 1h1m2 0h1m1 0h2m1 0h1m2 0h3m1 0h1m1 0h2m1 0h2m1 0h3m2 0h1m1 0h8m1 0h1m1 0h1m3 0h2m3 0h2m1 0h2m2 0h1m2 0h3m2 0h3m-69 1h3m2 0h1m2 0h4m3 0h3m2 0h1m2 0h2m1 0h1m4 0h7m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m1 0h2m1 0h1m4 0h5m2 0h1m-67 1h1m1 0h1m1 0h3m1 0h1m1 0h7m2 0h2m3 0h1m2 0h3m5 0h2m1 0h6m1 0h2m2 0h2m1 0h1m1 0h2m1 0h2m1 0h4m1 0h2m1 0h1m-69 1h1m6 0h1m2 0h1m2 0h1m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h3m2 0h2m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h2m2 0h1m-69 1h1m2 0h2m1 0h4m2 0h1m4 0h2m1 0h3m2 0h12m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m2 0h1m2 0h2m1 0h5m1 0h3m-61 1h3m2 0h5m2 0h3m1 0h2m1 0h1m1 0h2m1 0h1m3 0h3m4 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h3m1 0h2m3 0h1m1 0h2m-68 1h7m1 0h1m2 0h3m3 0h2m1 0h3m2 0h1m1 0h2m2 0h2m1 0h1m1 0h3m1 0h1m3 0h2m3 0h4m3 0h1m2 0h2m1 0h1m1 0h1m2 0h1m-68 1h1m5 0h1m1 0h1m2 0h1m1 0h2m3 0h5m1 0h1m1 0h2m1 0h1m1 0h2m3 0h2m2 0h3m1 0h1m3 0h1m2 0h2m3 0h1m3 0h1m3 0h5m-69 1h1m1 0h3m1 0h1m2 0h1m3 0h1m2 0h2m2 0h3m1 0h1m3 0h1m3 0h5m1 0h1m4 0h4m2 0h1m1 0h1m2 0h3m3 0h8m-68 1h1m1 0h3m1 0h1m1 0h4m2 0h1m1 0h1m2 0h1m3 0h3m1 0h2m1 0h1m1 0h3m1 0h1m4 0h1m1 0h4m1 0h2m1 0h2m2 0h4m1 0h4m1 0h3m-68 1h1m1 0h3m1 0h1m1 0h1m3 0h7m1 0h1m1 0h1m1 0h1m1 0h1m3 0h4m1 0h1m2 0h4m3 0h1m1 0h5m1 0h1m1 0h3m1 0h3m3 0h1m-66 1h1m5 0h1m4 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h2m3 0h2m1 0h3m5 0h1m1 0h1m6 0h2m2 0h1m1 0h1m1 0h1m2 0h5m3 0h1m-69 1h7m1 0h1m1 0h3m3 0h1m4 0h4m3 0h2m3 0h3m4 0h3m2 0h3m3 0h2m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1"/></svg>
+</div>
+    <div id="qr-en" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 73" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid meet"><path stroke="#000" d="M2 2.5h7m1 0h1m4 0h1m3 0h7m1 0h1m3 0h1m1 0h1m3 0h1m1 0h1m2 0h3m1 0h1m2 0h1m6 0h2m2 0h3m1 0h7m-69 1h1m5 0h1m1 0h2m1 0h3m3 0h3m3 0h1m1 0h1m5 0h2m8 0h1m2 0h1m2 0h2m1 0h3m1 0h3m5 0h1m5 0h1m-69 1h1m1 0h3m1 0h1m2 0h1m2 0h4m1 0h1m1 0h2m1 0h2m4 0h2m4 0h2m3 0h2m1 0h1m1 0h1m1 0h3m1 0h3m1 0h3m1 0h1m3 0h1m1 0h3m1 0h1m-69 1h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m4 0h1m6 0h4m3 0h5m7 0h3m1 0h1m2 0h3m4 0h1m1 0h1m1 0h3m1 0h1m-69 1h1m1 0h3m1 0h1m3 0h4m2 0h1m3 0h3m1 0h1m1 0h2m2 0h11m2 0h1m1 0h1m2 0h3m1 0h2m1 0h4m1 0h1m1 0h1m1 0h3m1 0h1m-69 1h1m5 0h1m6 0h8m2 0h1m1 0h2m1 0h1m2 0h2m3 0h1m1 0h1m3 0h2m2 0h2m1 0h2m2 0h2m2 0h2m3 0h1m5 0h1m-69 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-61 1h2m2 0h1m1 0h1m1 0h3m2 0h4m5 0h3m3 0h1m3 0h2m4 0h1m1 0h6m1 0h1m1 0h3m-60 1h1m1 0h2m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m4 0h2m3 0h1m2 0h5m1 0h5m6 0h1m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h1m1 0h2m-68 1h4m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1m1 0h3m5 0h1m3 0h2m2 0h1m2 0h4m3 0h3m4 0h3m2 0h3m2 0h3m1 0h1m-69 1h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h1m1 0h1m4 0h3m2 0h1m3 0h2m1 0h2m1 0h3m1 0h2m1 0h1m6 0h3m1 0h1m1 0h1m2 0h1m2 0h6m-67 1h1m6 0h5m1 0h3m3 0h2m1 0h2m2 0h2m3 0h3m6 0h1m2 0h6m7 0h3m-61 1h1m1 0h1m1 0h1m1 0h4m1 0h1m2 0h5m3 0h4m1 0h7m2 0h2m5 0h1m1 0h1m1 0h2m1 0h2m1 0h3m1 0h1m1 0h1m3 0h1m4 0h1m-67 1h2m3 0h2m3 0h3m2 0h4m2 0h2m2 0h1m1 0h1m6 0h3m1 0h2m3 0h1m1 0h1m1 0h3m3 0h2m2 0h1m1 0h2m1 0h1m2 0h1m-68 1h1m2 0h2m1 0h1m1 0h2m3 0h5m1 0h4m1 0h2m2 0h1m3 0h1m1 0h2m1 0h3m1 0h4m3 0h2m2 0h1m2 0h1m1 0h1m2 0h6m1 0h1m-67 1h3m4 0h4m1 0h1m2 0h1m2 0h2m2 0h1m4 0h2m1 0h1m6 0h2m2 0h1m1 0h1m3 0h1m6 0h4m1 0h3m1 0h1m1 0h2m-68 1h1m2 0h2m1 0h2m1 0h1m1 0h5m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m2 0h2m3 0h1m5 0h4m5 0h1m1 0h1m2 0h1m1 0h2m1 0h1m3 0h4m-67 1h2m1 0h1m2 0h2m1 0h2m2 0h2m3 0h1m5 0h1m1 0h1m1 0h2m2 0h3m3 0h2m3 0h3m3 0h1m3 0h1m1 0h3m1 0h1m1 0h2m2 0h2m-65 1h3m1 0h3m1 0h3m1 0h4m2 0h1m4 0h3m2 0h1m1 0h3m2 0h1m1 0h1m4 0h1m1 0h1m2 0h3m1 0h1m4 0h4m1 0h3m-68 1h2m2 0h2m1 0h2m3 0h1m1 0h1m1 0h2m1 0h4m5 0h2m1 0h2m2 0h1m1 0h1m5 0h1m2 0h6m3 0h1m1 0h2m2 0h2m4 0h2m-69 1h1m3 0h3m1 0h1m1 0h2m1 0h1m1 0h1m4 0h1m2 0h1m1 0h2m2 0h1m1 0h2m2 0h1m4 0h1m4 0h3m1 0h1m1 0h5m4 0h1m1 0h1m1 0h4m-68 1h1m2 0h1m3 0h2m1 0h1m2 0h2m4 0h2m1 0h2m12 0h1m4 0h3m5 0h1m4 0h1m4 0h3m2 0h1m-61 1h1m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h9m1 0h1m1 0h1m4 0h3m1 0h3m3 0h4m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m-67 1h3m2 0h4m5 0h1m3 0h3m3 0h1m1 0h1m1 0h1m3 0h1m4 0h1m1 0h1m2 0h3m1 0h2m2 0h1m2 0h1m5 0h1m2 0h2m-66 1h1m4 0h4m2 0h2m1 0h1m2 0h5m1 0h1m2 0h4m4 0h1m1 0h1m5 0h1m2 0h1m1 0h2m2 0h1m3 0h1m5 0h2m3 0h3m-68 1h3m3 0h2m2 0h3m1 0h6m1 0h1m1 0h4m1 0h2m1 0h1m3 0h3m1 0h1m4 0h1m4 0h2m5 0h1m3 0h2m1 0h2m2 0h1m-67 1h1m1 0h3m1 0h2m2 0h1m2 0h1m2 0h1m1 0h2m1 0h3m2 0h1m2 0h1m3 0h1m2 0h1m5 0h2m3 0h3m3 0h3m1 0h1m2 0h1m1 0h2m-64 1h2m1 0h1m1 0h1m1 0h1m6 0h1m1 0h1m1 0h4m2 0h1m2 0h1m1 0h1m3 0h1m4 0h2m1 0h2m1 0h2m4 0h1m2 0h4m1 0h2m2 0h5m-68 1h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h2m2 0h1m3 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h3m1 0h1m2 0h2m2 0h4m2 0h2m1 0h1m1 0h2m-67 1h2m1 0h1m3 0h1m1 0h1m2 0h1m2 0h2m1 0h1m1 0h2m4 0h3m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m3 0h2m1 0h2m2 0h1m2 0h4m2 0h1m1 0h2m1 0h2m-68 1h1m2 0h12m2 0h1m2 0h1m2 0h1m2 0h2m2 0h3m1 0h1m1 0h1m1 0h3m6 0h1m1 0h2m2 0h1m7 0h2m4 0h1m-63 1h1m1 0h2m1 0h2m2 0h1m4 0h1m4 0h2m1 0h1m3 0h3m2 0h7m6 0h2m1 0h4m4 0h2m5 0h2m-68 1h2m1 0h5m4 0h4m2 0h2m2 0h1m1 0h1m2 0h2m2 0h6m1 0h2m1 0h1m4 0h1m1 0h5m1 0h1m2 0h7m2 0h1m-68 1h3m1 0h1m3 0h3m1 0h1m1 0h3m1 0h3m4 0h1m1 0h1m1 0h2m1 0h1m3 0h2m2 0h1m1 0h1m1 0h1m4 0h1m4 0h1m1 0h2m2 0h1m3 0h3m1 0h1m-65 1h1m1 0h1m1 0h2m3 0h1m1 0h3m2 0h1m1 0h2m1 0h1m3 0h2m1 0h1m1 0h1m1 0h8m2 0h2m2 0h1m2 0h2m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m-69 1h1m1 0h3m3 0h1m2 0h1m4 0h1m1 0h1m3 0h2m1 0h1m1 0h2m1 0h3m3 0h2m1 0h1m2 0h1m3 0h5m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m1 0h1m-67 1h1m1 0h6m1 0h1m2 0h6m3 0h1m1 0h1m2 0h11m3 0h1m1 0h1m1 0h2m1 0h1m1 0h2m3 0h1m3 0h6m-64 1h5m2 0h2m2 0h1m2 0h1m3 0h1m4 0h3m2 0h3m2 0h1m1 0h6m1 0h1m1 0h1m1 0h1m1 0h4m3 0h1m4 0h3m-64 1h4m2 0h1m2 0h3m6 0h3m3 0h2m1 0h1m2 0h3m1 0h5m1 0h3m1 0h2m3 0h1m6 0h1m4 0h1m1 0h3m-66 1h1m4 0h1m1 0h2m3 0h6m5 0h1m4 0h1m2 0h3m2 0h2m2 0h1m1 0h5m1 0h2m1 0h1m1 0h2m1 0h2m1 0h1m6 0h1m-64 1h4m1 0h8m3 0h1m2 0h2m1 0h2m1 0h1m2 0h1m1 0h1m1 0h3m5 0h3m4 0h1m2 0h1m1 0h2m1 0h3m3 0h1m1 0h3m-68 1h1m2 0h2m2 0h1m1 0h3m1 0h3m1 0h3m4 0h1m2 0h1m1 0h1m1 0h1m1 0h3m3 0h1m2 0h1m1 0h2m4 0h2m2 0h1m2 0h1m4 0h2m3 0h1m-69 1h1m1 0h1m1 0h1m1 0h3m4 0h3m7 0h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h3m1 0h1m4 0h1m2 0h3m1 0h2m1 0h3m1 0h2m2 0h1m1 0h3m-68 1h1m1 0h3m2 0h1m1 0h2m2 0h1m2 0h1m1 0h1m4 0h2m1 0h3m1 0h2m6 0h1m1 0h3m4 0h1m1 0h1m2 0h1m1 0h1m2 0h2m1 0h2m1 0h2m3 0h1m-68 1h7m2 0h4m2 0h1m2 0h2m2 0h1m1 0h1m3 0h1m3 0h2m1 0h6m3 0h3m2 0h1m1 0h2m4 0h1m3 0h2m2 0h1m-67 1h2m1 0h2m2 0h1m3 0h3m2 0h1m3 0h2m1 0h1m1 0h1m6 0h4m1 0h1m2 0h3m1 0h1m3 0h2m1 0h1m2 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h1m-69 1h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h1m3 0h1m3 0h1m2 0h1m1 0h1m1 0h4m1 0h4m3 0h2m1 0h1m3 0h1m2 0h1m1 0h1m2 0h3m1 0h4m-69 1h1m2 0h2m3 0h3m1 0h3m2 0h2m3 0h2m8 0h1m2 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h2m1 0h1m3 0h4m2 0h1m-64 1h1m2 0h2m1 0h1m1 0h2m1 0h1m4 0h1m3 0h1m1 0h7m1 0h1m2 0h2m4 0h1m5 0h3m4 0h2m2 0h1m2 0h4m2 0h1m-67 1h1m1 0h2m5 0h1m1 0h2m1 0h1m2 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h5m1 0h1m1 0h2m2 0h5m3 0h1m5 0h3m1 0h1m1 0h1m-66 1h2m1 0h3m3 0h1m1 0h2m1 0h2m1 0h2m3 0h1m1 0h1m3 0h4m2 0h3m1 0h1m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m3 0h1m-68 1h3m4 0h2m2 0h3m3 0h7m1 0h3m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m2 0h2m1 0h3m1 0h1m1 0h3m2 0h2m1 0h2m1 0h4m-68 1h1m2 0h1m1 0h1m2 0h2m1 0h3m4 0h1m2 0h3m1 0h3m3 0h2m3 0h2m3 0h4m4 0h1m3 0h1m1 0h1m1 0h2m2 0h4m-64 1h2m1 0h1m1 0h3m5 0h3m2 0h6m2 0h3m1 0h1m2 0h1m5 0h1m1 0h1m2 0h2m1 0h1m5 0h1m1 0h2m4 0h3m1 0h2m-69 1h2m1 0h2m1 0h5m2 0h1m3 0h2m4 0h1m1 0h3m1 0h2m3 0h1m5 0h1m4 0h1m1 0h1m1 0h3m5 0h1m1 0h1m1 0h1m1 0h1m1 0h3m-66 1h1m7 0h2m2 0h3m4 0h2m2 0h4m2 0h2m2 0h1m9 0h4m2 0h1m1 0h1m3 0h1m1 0h2m2 0h1m3 0h2m-68 1h1m2 0h1m1 0h2m4 0h3m1 0h1m1 0h2m1 0h2m1 0h3m2 0h1m1 0h8m1 0h1m1 0h1m3 0h2m3 0h2m1 0h2m2 0h1m2 0h3m2 0h3m-69 1h3m2 0h1m2 0h2m1 0h1m3 0h3m2 0h1m2 0h2m1 0h1m4 0h7m1 0h1m1 0h2m2 0h1m3 0h1m1 0h2m1 0h1m4 0h5m2 0h1m-67 1h1m1 0h1m1 0h3m1 0h1m1 0h7m2 0h2m3 0h1m2 0h3m5 0h2m1 0h6m1 0h3m1 0h2m1 0h1m1 0h2m1 0h2m1 0h4m1 0h2m1 0h1m-69 1h1m6 0h1m2 0h1m2 0h1m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h3m2 0h2m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m3 0h2m2 0h1m-69 1h1m2 0h2m1 0h4m2 0h1m2 0h1m1 0h2m1 0h3m2 0h12m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m2 0h1m2 0h2m1 0h5m1 0h3m-61 1h3m2 0h2m1 0h2m2 0h3m1 0h1m2 0h1m1 0h2m1 0h1m3 0h3m4 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h3m1 0h2m3 0h1m1 0h2m-68 1h7m1 0h1m2 0h3m1 0h4m1 0h3m2 0h1m1 0h2m2 0h2m1 0h1m1 0h3m1 0h1m3 0h2m3 0h4m3 0h1m2 0h2m1 0h1m1 0h1m2 0h1m-68 1h1m5 0h1m1 0h1m2 0h1m1 0h3m2 0h5m1 0h1m1 0h2m1 0h1m1 0h2m3 0h2m2 0h3m1 0h1m3 0h1m3 0h1m3 0h1m3 0h1m3 0h5m-69 1h1m1 0h3m1 0h1m2 0h1m3 0h1m2 0h2m2 0h3m1 0h1m3 0h1m3 0h5m1 0h1m4 0h4m2 0h1m1 0h1m2 0h3m3 0h8m-68 1h1m1 0h3m1 0h1m1 0h4m2 0h1m1 0h1m2 0h1m3 0h3m1 0h2m1 0h1m1 0h3m1 0h1m4 0h1m1 0h4m1 0h2m1 0h2m2 0h4m1 0h4m1 0h3m-68 1h1m1 0h3m1 0h1m1 0h1m3 0h7m1 0h1m3 0h1m1 0h1m3 0h4m1 0h1m2 0h4m3 0h1m1 0h5m1 0h1m1 0h3m1 0h3m3 0h1m-66 1h1m5 0h1m4 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h2m3 0h2m1 0h3m5 0h1m1 0h1m6 0h2m2 0h1m1 0h1m1 0h1m2 0h5m3 0h1m-69 1h7m1 0h1m1 0h3m3 0h1m3 0h1m1 0h3m3 0h2m3 0h3m4 0h3m2 0h3m3 0h2m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1"/></svg>
+</div>
+  </div>
+
+  <div>
+    <h1 class="nome">Alessandro Louzado</h1>
+    <p class="cargo" id="cargo">Advogado</p>
+  </div>
+  <p class="dica" id="dica">Aponte a câmera do celular para o código</p>
+
+  <nav class="rodape">
+    <button type="button" id="b-pt" aria-pressed="true">PT</button>
+    <button type="button" id="b-en" aria-pressed="false">EN</button>
+    <a href="../" id="link-cartao">Ver cartão completo</a>
+  </nav>
+</main>
+
+<script>
+  const T = {
+    pt: {'chamada': 'ESCANEIE PARA SALVAR MEU CONTATO', 'dica': 'Aponte a câmera do celular para o código', 'cartao': 'Ver cartão completo', 'cargo': 'Advogado'},
+    en: {'chamada': 'SCAN TO SAVE MY CONTACT', 'dica': 'Point your phone camera at the code', 'cartao': 'See full card', 'cargo': 'Attorney'}
+  };
+  function idioma(l) {
+    const t = T[l] || T.pt;
+    document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
+    document.getElementById("chamada").textContent = t.chamada;
+    document.getElementById("cargo").textContent = t.cargo;
+    document.getElementById("dica").textContent = t.dica;
+    document.getElementById("link-cartao").textContent = t.cartao;
+    document.getElementById("qr-pt").hidden = l !== "pt";
+    document.getElementById("qr-en").hidden = l !== "en";
+    document.getElementById("b-pt").setAttribute("aria-pressed", String(l === "pt"));
+    document.getElementById("b-en").setAttribute("aria-pressed", String(l === "en"));
+    try { localStorage.setItem("contato-lang", l); } catch (e) {}
+  }
+  document.getElementById("b-pt").addEventListener("click", () => idioma("pt"));
+  document.getElementById("b-en").addEventListener("click", () => idioma("en"));
+  try {
+    const s = localStorage.getItem("contato-lang");
+    if (s && s !== "pt") idioma(s);
+  } catch (e) {}
+
+  // guarda a tela para ela abrir mesmo sem sinal
+  if ("serviceWorker" in navigator) {
+    addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  }
+</script>
+</body>
+</html>

@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Gera a tela "Meu contato": um QR grande que salva o contato da Dra. Sirlei.
+"""Gera a tela "Meu contato" de cada advogado: um QR grande que salva o contato.
 
     python gerar_contato.py
 
-Para que serve: ela abre essa tela no iPhone e mostra para a pessoa. A
+Para que serve: o advogado abre essa tela no celular e mostra para a pessoa. A
 pessoa aponta a câmera e o telefone já abre a ficha pronta para salvar.
 Não precisa de internet do lado de quem escaneia, porque o contato inteiro
 vai dentro do QR, não um endereço de site.
 
-Saída:
-  contato/index.html   a tela (dá para adicionar à tela de início do iPhone)
-  contato/sw.js        cache para a tela abrir sem sinal
-  contato/icone.png    ícone do atalho na tela de início
-  contato/Sirlei Andrade QR Contato.png   imagem para guardar nas Fotos
+Os dados vêm de pessoas.py. Saída, em <pasta da pessoa>/contato/:
+  index.html                 a tela (dá para adicionar à tela de início do iPhone)
+  sw.js                      cache para a tela abrir sem sinal
+  icone.png                  ícone do atalho na tela de início
+  <Nome> QR Contato.png      imagem para guardar nas Fotos
 """
 
 from __future__ import annotations
@@ -23,48 +23,39 @@ from pathlib import Path
 
 import segno
 
+from qr_robusto import qr_mais_legivel
+
 AQUI = Path(__file__).resolve().parent
-DEST = AQUI / "contato"
 CHROME = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
 
 CORES = {"fundo": "#030714", "ouro": "#c2ad83", "marfim": "#f4efe6",
          "apagado": "#8792a8"}
 
-# --------------------------------------------------------------------------
-# O contato. Mesmos dados do cartão impresso e do site.
-# --------------------------------------------------------------------------
-CONTATO = {
-    "nome": "Sirlei", "sobrenome": "Andrade", "completo": "Sirlei Andrade",
-    "empresa": "Sirlei Andrade Advogados Associados",
-    "celular": "+5511947234782",
-    "email": "sirlei@sirleiadv.com.br",
-    "site": "https://www.sirleiadv.com.br",
-    "rua": "Rua Barão de Itaim, 83-A - Granja Julieta",
-    "cidade": "São Paulo", "uf": "SP", "cep": "04720-030", "pais": "Brasil",
-}
-CARGO = {"pt": "Sócia-fundadora", "en": "Founding Partner"}
+from pessoas import ESCRITORIO, PESSOAS
 
 TEXTOS = {
     "pt": {"chamada": "ESCANEIE PARA SALVAR MEU CONTATO",
-           "cargo": "Sócia-fundadora",
            "dica": "Aponte a câmera do celular para o código",
            "cartao": "Ver cartão completo"},
     "en": {"chamada": "SCAN TO SAVE MY CONTACT",
-           "cargo": "Founding Partner",
            "dica": "Point your phone camera at the code",
            "cartao": "See full card"},
 }
 
 
-def vcard(idioma: str) -> str:
-    c = CONTATO
+def textos(p: dict, idioma: str) -> dict:
+    return {**TEXTOS[idioma], "cargo": p["cargo"][idioma]}
+
+
+def vcard(p: dict, idioma: str) -> str:
+    c = {**ESCRITORIO, **p}
     esc = lambda s: str(s).replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;")
     return "\r\n".join([
         "BEGIN:VCARD", "VERSION:3.0",
         f"N:{esc(c['sobrenome'])};{esc(c['nome'])};;;",
         f"FN:{esc(c['completo'])}",
         f"ORG:{esc(c['empresa'])}",
-        f"TITLE:{esc(CARGO[idioma])}",
+        f"TITLE:{esc(c['cargo'][idioma])}",
         f"TEL;TYPE=CELL:{c['celular']}",
         f"EMAIL:{c['email']}",
         f"URL:{c['site']}",
@@ -74,9 +65,9 @@ def vcard(idioma: str) -> str:
     ]) + "\r\n"
 
 
-def qr_svg(idioma: str) -> tuple[str, int]:
+def qr_svg(p: dict, idioma: str) -> tuple[str, int]:
     """QR do contato como SVG inline, sem moldura própria."""
-    qr = segno.make(vcard(idioma), error="m")
+    qr = qr_mais_legivel(vcard(p, idioma), error="m")
     import io
     buf = io.BytesIO()          # o escritor de SVG do segno trabalha em bytes
     qr.save(buf, kind="svg", scale=1, border=2, dark="#000000", light=None,
@@ -102,14 +93,14 @@ LOGO = """<svg viewBox="167 71 301 308" aria-hidden="true"><defs>
 <polygon points="317,86 453,244 317,308 182,244" fill="none" stroke="url(#lo)" stroke-width="15" mask="url(#lfo)"/></svg>"""
 
 
-def pagina(qr_pt: str, qr_en: str) -> str:
-    t = TEXTOS["pt"]
+def pagina(p: dict, qr_pt: str, qr_en: str) -> str:
+    t = textos(p, "pt")
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Contato — Sirlei Andrade</title>
+<title>Contato — {p['completo']}</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="{CORES['fundo']}">
 <!-- vira atalho de tela cheia quando adicionada à tela de início do iPhone -->
@@ -192,7 +183,7 @@ def pagina(qr_pt: str, qr_en: str) -> str:
   </div>
 
   <div>
-    <h1 class="nome">Sirlei Andrade</h1>
+    <h1 class="nome">{p['completo']}</h1>
     <p class="cargo" id="cargo">{t['cargo']}</p>
   </div>
   <p class="dica" id="dica">{t['dica']}</p>
@@ -206,8 +197,8 @@ def pagina(qr_pt: str, qr_en: str) -> str:
 
 <script>
   const T = {{
-    pt: {TEXTOS['pt']!r},
-    en: {TEXTOS['en']!r}
+    pt: {textos(p, 'pt')!r},
+    en: {textos(p, 'en')!r}
   }};
   function idioma(l) {{
     const t = T[l] || T.pt;
@@ -239,7 +230,11 @@ def pagina(qr_pt: str, qr_en: str) -> str:
 """
 
 
-SW = """// Guarda a tela de contato para ela abrir sem internet.
+SW = """// Guarda a tela de contato para abrir sem internet.
+// O nome "contato-v1" é o mesmo da tela da Dra. Sirlei, de propósito: o
+// service worker dela (publicado, não muda) apaga no activate todo cache com
+// outro nome. As entradas não colidem porque cada tela guarda as próprias
+// URLs. Por isso este aqui também nunca apaga cache nenhum.
 const CACHE = "contato-v1";
 const ARQUIVOS = ["./", "./index.html", "./icone.png"];
 
@@ -248,9 +243,7 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
-  e.waitUntil(caches.keys()
-    .then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
-    .then(() => self.clients.claim()));
+  e.waitUntil(self.clients.claim());
 });
 
 // cache primeiro: abre instantâneo e funciona offline; atualiza por trás
@@ -272,7 +265,7 @@ self.addEventListener("fetch", (e) => {
 
 
 def png_por_chrome(html: str, largura: int, altura: int, destino: Path) -> bool:
-    tmp = DEST / "_tmp.html"
+    tmp = destino.parent / "_tmp.html"
     tmp.write_text(html, encoding="utf-8")
     subprocess.run(
         [str(CHROME), "--headless", "--disable-gpu", "--hide-scrollbars",
@@ -290,7 +283,7 @@ div{{width:132px;height:132px;margin:24px}} svg{{width:100%;height:100%;display:
 </style><div>{LOGO}</div>"""
 
 
-def imagem_fotos(qr: str) -> str:
+def imagem_fotos(p: dict, qr: str) -> str:
     return f"""<!DOCTYPE html><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Inter:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -306,27 +299,26 @@ h1{{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:82p
 <div class="c">
   <p class="t">Escaneie para salvar meu contato</p>
   <div class="p">{qr}</div>
-  <div style="text-align:center"><h1>Sirlei Andrade</h1><p class="g">Sócia-fundadora</p></div>
+  <div style="text-align:center"><h1>{p['completo']}</h1><p class="g">{p['cargo']['pt']}</p></div>
 </div>"""
 
 
 def main() -> None:
-    DEST.mkdir(exist_ok=True)
-    qr_pt, v_pt = qr_svg("pt")
-    qr_en, v_en = qr_svg("en")
-
-    (DEST / "index.html").write_text(pagina(qr_pt, qr_en), encoding="utf-8")
-    (DEST / "sw.js").write_text(SW, encoding="utf-8")
-
-    ok_i = png_por_chrome(icone(), 180, 180, DEST / "icone.png")
-    ok_f = png_por_chrome(imagem_fotos(qr_pt), 1200, 1500,
-                          DEST / "Sirlei Andrade QR Contato.png")
-
-    print(f"vCard: {len(vcard('pt').encode())} bytes")
-    print(f"QR   : versão {v_pt} (PT) / {v_en} (EN), correção M")
-    print(f"ícone .......... {'ok' if ok_i else 'FALHOU'}")
-    print(f"imagem p/ Fotos  {'ok' if ok_f else 'FALHOU'}")
-    print(f"\narquivos em: {DEST}")
+    for slug, p in PESSOAS.items():
+        if p.get("congelado"):
+            continue                              # publicado: não mexer
+        dest = AQUI / p["pasta"] / "contato"
+        dest.mkdir(parents=True, exist_ok=True)
+        qr_pt, v = qr_svg(p, "pt")
+        qr_en, _ = qr_svg(p, "en")
+        (dest / "index.html").write_text(pagina(p, qr_pt, qr_en), encoding="utf-8")
+        (dest / "sw.js").write_text(SW, encoding="utf-8")
+        ok_i = png_por_chrome(icone(), 180, 180, dest / "icone.png")
+        ok_f = png_por_chrome(imagem_fotos(p, qr_pt), 1200, 1500,
+                              dest / f"{p['completo']} QR Contato.png")
+        print(f"{slug:11} vCard {len(vcard(p, 'pt').encode())} bytes · QR versão {v} · "
+              f"ícone {'ok' if ok_i else 'FALHOU'} · imagem {'ok' if ok_f else 'FALHOU'}"
+              f"  -> {dest.relative_to(AQUI)}")
 
 
 if __name__ == "__main__":

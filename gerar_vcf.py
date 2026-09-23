@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Gera os cartões de contato (.vcf) do cartão digital da Dra. Sirlei.
+"""Gera os cartões de contato (.vcf) de cada advogado do site.
 
 Rodar depois de alterar telefone, e-mail, endereço ou a foto:
 
     python gerar_vcf.py
 
-Saída: sirlei.vcf (português) e sirlei-en.vcf (inglês), na mesma pasta.
-O botão "Adicionar aos contatos" do index.html aponta direto para esses
-arquivos — por isso eles precisam ser publicados junto com a página.
+Os dados vêm de pessoas.py. Saída, na pasta de cada um: <slug>.vcf
+(português) e <slug>-en.vcf (inglês). O botão "Adicionar aos contatos"
+da página aponta direto para esses arquivos, por isso eles precisam ser
+publicados junto com ela.
 """
 
 from __future__ import annotations
@@ -18,29 +19,8 @@ from pathlib import Path
 
 PASTA = Path(__file__).resolve().parent
 
-# --------------------------------------------------------------------------
-# Dados do contato. Só o celular da Dra. Sirlei entra no cartão.
-# --------------------------------------------------------------------------
-CONTATO = {
-    "nome": "Sirlei",
-    "sobrenome": "Andrade",
-    "nome_completo": "Sirlei Andrade",
-    "empresa": "Sirlei Andrade Advogados Associados",
-    "celular": "+5511947234782",
-    "email": "sirlei@sirleiadv.com.br",
-    "site": "https://www.sirleiadv.com.br",
-    "endereco": {
-        "rua": "Rua Barão de Itaim, 83-A - Granja Julieta",
-        "cidade": "São Paulo",
-        "uf": "SP",
-        "cep": "04720-030",
-        "pais": "Brasil",
-    },
-}
+from pessoas import ESCRITORIO, PESSOAS
 
-CARGO = {"pt": "Sócia-fundadora", "en": "Founding Partner"}
-
-FOTO = PASTA / "sirlei.jpg"   # embutida no contato; apague a linha PHOTO se não quiser
 FOTO_PX = 240                 # lado da foto embutida (quanto maior, maior o arquivo)
 
 
@@ -67,15 +47,15 @@ def dobrar(linha: str, limite: int = 74) -> list[str]:
     return partes
 
 
-def foto_base64() -> str | None:
+def foto_base64(foto: Path) -> str | None:
     """Reduz a foto e devolve em base64; devolve None se não houver foto/Pillow."""
-    if not FOTO.exists():
+    if not foto.exists():
         return None
     try:
         from PIL import Image
     except ImportError:
         return None
-    img = Image.open(FOTO).convert("RGB")
+    img = Image.open(foto).convert("RGB")
     lado = min(img.size)
     esq = (img.width - lado) // 2
     topo = (img.height - lado) // 2
@@ -86,19 +66,18 @@ def foto_base64() -> str | None:
     return base64.b64encode(buf.getvalue()).decode("ascii")
 
 
-def montar(idioma: str, foto: str | None) -> str:
-    c = CONTATO
-    a = c["endereco"]
+def montar(c: dict, idioma: str, foto: str | None) -> str:
+    a = ESCRITORIO
     linhas = [
         "BEGIN:VCARD",
         "VERSION:3.0",
         f"N:{escapar(c['sobrenome'])};{escapar(c['nome'])};;;",
-        f"FN:{escapar(c['nome_completo'])}",
-        f"ORG:{escapar(c['empresa'])}",
-        f"TITLE:{escapar(CARGO[idioma])}",
+        f"FN:{escapar(c['completo'])}",
+        f"ORG:{escapar(a['empresa'])}",
+        f"TITLE:{escapar(c['cargo'][idioma])}",
         f"TEL;TYPE=CELL,VOICE:{c['celular']}",
         f"EMAIL;TYPE=INTERNET,WORK:{c['email']}",
-        f"URL:{c['site']}",
+        f"URL:{a['site']}",
         "ADR;TYPE=WORK:;;"
         f"{escapar(a['rua'])};{escapar(a['cidade'])};{escapar(a['uf'])};"
         f"{escapar(a['cep'])};{escapar(a['pais'])}",
@@ -114,13 +93,17 @@ def montar(idioma: str, foto: str | None) -> str:
 
 
 def main() -> None:
-    foto = foto_base64()
-    if foto is None:
-        print("aviso: foto não embutida (arquivo ausente ou Pillow não instalado)")
-    for idioma, arquivo in (("pt", "sirlei.vcf"), ("en", "sirlei-en.vcf")):
-        destino = PASTA / arquivo
-        destino.write_text(montar(idioma, foto), encoding="utf-8", newline="")
-        print(f"{arquivo}: {destino.stat().st_size / 1024:.1f} KB")
+    for slug, c in PESSOAS.items():
+        if c.get("congelado"):
+            continue                              # publicado: não mexer
+        pasta = PASTA / c["pasta"]
+        foto = foto_base64(pasta / c["foto"])
+        if foto is None:
+            print(f"aviso: {slug} sem foto no contato (arquivo ausente ou Pillow não instalado)")
+        for idioma, arquivo in (("pt", f"{slug}.vcf"), ("en", f"{slug}-en.vcf")):
+            destino = pasta / arquivo
+            destino.write_text(montar(c, idioma, foto), encoding="utf-8", newline="")
+            print(f"{destino.relative_to(PASTA)}: {destino.stat().st_size / 1024:.1f} KB")
 
 
 if __name__ == "__main__":
